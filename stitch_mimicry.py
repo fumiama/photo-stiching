@@ -3,7 +3,7 @@
 
 from imgstitch.panorama import Stitcher
 from imgstitch.brightness import merge_brightness
-#from imutils import resize
+from imutils import resize
 from cv2 import imread, imshow, waitKey, imwrite
 from sys import argv
 
@@ -16,8 +16,8 @@ if __name__ == "__main__":
     # (for faster processing)
     imageL = imread(imageL)
     imageR = imread(imageR)
-    #imageL = resize(imageL, width=400)
-    #imageR = resize(imageR, width=400)
+    imageL = resize(imageL, width=400)
+    imageR = resize(imageR, width=400)
     imageL, imageR = merge_brightness([imageL, imageR])
     imshow("tmp", imageL)
     imshow("tmp", imageR)
