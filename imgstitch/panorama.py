@@ -1,12 +1,14 @@
 # 导入必要库
 import numpy as np
-from imutils import is_cv3
+from imutils import is_cv3, is_cv4
 import cv2
 
 class Stitcher:
 	def __init__(self):
 		# 是否使用cv3或更高版本
 		self.isv3 = is_cv3(True)
+		# 是否使用cv4或更高版本
+		self.isv4 = is_cv4(True)
 
 	def stitch(self, images, ratio=0.75, reprojThresh=4.0, showMatches=False):
 		# 用SIFT分别解析两幅图的关键点(kps)与特征(features)
@@ -38,7 +40,10 @@ class Stitcher:
 		gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 		# 因为不同版本调用函数不同，因此需要根据cv版本进行不同的处理
-		if self.isv3:
+		if self.isv4:
+			# 从图片检测并导出特征
+			(kps, features) = cv2.SIFT_create().detectAndCompute(image, None)
+		elif self.isv3:
 			# 从图片检测并导出特征
 			descriptor = cv2.xfeatures2d.SIFT_create()
 			(kps, features) = descriptor.detectAndCompute(image, None)
