@@ -17,7 +17,7 @@ def increase_brightness(img, value=30):
 
 #对比度亮度调整
 def adjust_v(img, average_v_mean, my_mean):
-    return increase_brightness(img, int(-1.4 * (my_mean - average_v_mean)))
+    return increase_brightness(img, int(0 * (my_mean - average_v_mean)))
 
 def get_mean_v(imgs):
     mean = 0
