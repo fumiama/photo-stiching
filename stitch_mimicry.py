@@ -19,8 +19,7 @@ if __name__ == "__main__":
         imageR = argv[2]
         imageO = argv[3]
 
-    # load the two images and resize them to have a width of 400 pixels
-    # (for faster processing)
+    # 为加快处理速度，加载两图片后缩放宽度为w
     imageL = imread(imageL)
     imageR = imread(imageR)
     if w > 0:
@@ -31,11 +30,10 @@ if __name__ == "__main__":
     imshow("tmpR", imageR)
     waitKey(0)
 
-    # stitch the images together to create a panorama
-    stitcher = Stitcher()
-    result, vis = stitcher.stitch([imageL, imageR], showMatches=True)
+    # 调用类方法拼接图片
+    result, vis = Stitcher().stitch([imageL, imageR], showMatches=True)
 
-    # show the images
+    # 展示图片
     imshow("Image L", imageL)
     imshow("Image R", imageR)
     imshow("Keypoint Matches", vis)
